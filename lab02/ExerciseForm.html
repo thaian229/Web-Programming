@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Form</title>
+</head>
+
+<body>
+    <h2>Please Fill In The Info Form Below</h2>
+    <form action="ExerciseForm.php" method="POST">
+        <label for="name">Full name:</label><br>
+        <input type="text" id="name" size="30" maxlength="30" name="name" /><br>
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" size="30" maxlength="30" name="email" /><br>
+        <label for="tel">Tel Number:</label><br>
+        <input type="tel" id="tel" name="tel" /><br>
+        <br>
+        Your gender:<br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label>
+        <br /><br />
+        Your preferences:<br>
+        <input type="checkbox" id="pref01" name="pref[]" value="Sport">
+        <label for="pref01"> Sport</label><br>
+        <input type="checkbox" id="pref02" name="pref[]" value="Car">
+        <label for="pref02"> Car</label><br>
+        <input type="checkbox" id="pref03" name="pref[]" value="Movie">
+        <label for="pref03"> Movie</label><br>
+        <input type="checkbox" id="pref04" name="pref[]" value="Fashion">
+        <label for="pref04"> Fashion</label><br>
+        <input type="checkbox" id="pref05" name="pref[]" value="Economic">
+        <label for="pref05"> Economic</label><br>
+        <br />
+        Do you want to receive news related to your preferences?<br>
+        <input type="radio" id="news1" name="news" value=1 />
+        <label for="news1">Yes</label>
+        <input type="radio" id="news0" name="news" value=0 />
+        <label for="news0">No</label>
+        <br /><br />
+        <input type="SUBMIT" value="Submit" />
+        <input type="RESET" value="Reset" />
+    </form>
+</body>
+
+</html>
