@@ -30,22 +30,22 @@ $rate;
 $final = (2 * $g1 + 3 * $g2) / 5;
 
 if ($final > 89) {
-    print("Your final grade is $final. You got an A. Congratulation!");
+    printf("Your final grade is $final. You got an A. Congratulation!");
     $rate = "A";
 } elseif ($final > 79) {
-    print("Your final grade is $final. You got an B.");
+    printf("Your final grade is $final. You got an B.");
     $rate = "B";
 } elseif ($final > 69) {
-    print("Your final grade is $final. You got an C.");
+    printf("Your final grade is $final. You got an C.");
     $rate = "C";
 } elseif ($final > 59) {
-    print("Your final grade is $final. You got an D.");
+    printf("Your final grade is $final. You got an D.");
     $rate = "D";
 } elseif ($final > 0) {
-    print("Your final grade is $final. You got an F.");
+    printf("Your final grade is $final. You got an F.");
     $rate = "F";
 } else {
-    print("Illegal grade less than 0. Final grade = $final");
+    printf("Illegal grade less than 0. Final grade = $final");
 }
 
 print("<br/>");
