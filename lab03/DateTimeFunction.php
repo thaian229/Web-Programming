@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <h1>You have an appointment!!!</h1>
     <title>Date and Time</title>
 </head>
 <body>
+
+<h1>Date Time Function</h1>
+
 <?php
 if (isset($_GET['reset'])) {
     unset($_GET["name1"]);
@@ -23,65 +25,49 @@ if (isset($_GET['reset'])) {
 <?php
 function display_date_in_char($time)
 {
-    echo date('l jS \of F Y', $time);
+    echo date("l, F j, Y", $time);
 }
 
 function calculate_age($month, $day, $year)
 {
-    $str_date = $year . "-" . $month . "-" . $day;
-    $earlier = new DateTime($str_date);
-    $later = new DateTime('NOW');
-    $diff = $later->diff($earlier)->format("%a");
-    echo $diff;
+    $str_date = $day . "." . $month . "." . $year;
+    $bday = new DateTime($str_date);
+    $today = new Datetime(date('d.m.y'));
+    $diff = $today->diff($bday);
     return $diff;
 }
 
 function calculate_date_difference($d1, $d2)
 {
     $days_between = ceil(abs($d1 - $d2) / 86400);
-    echo $days_between;
     return $days_between;
+}
+
+function calculate_age_difference($d1, $d2)
+{
+    $years_between = abs(
+            calculate_age(date('m', $d1), date('d', $d1), date('Y', $d1))->y
+        - calculate_age(date('m', $d2), date('d', $d2), date('Y', $d2))->y
+    );
+    return $years_between;
+
 }
 
 function validate_date($month, $day, $year)
 {
     if ($day && $month && $year) {
-        switch ($month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                $days_in_month = 31;
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                $days_in_month = 30;
-                break;
-            case 2:
-                if (date("l", $year)) {
-                    $days_in_month = 29;
-                } else {
-                    $days_in_month = 28;
-                }
-                break;
-            default:
-                echo "<br>Invalid month<br>";
-                return false;
+        $days_in_month = date('t', strtotime('1-' . $month . '-' . $year));
+        if ($month < 1 && $month > 12 && !is_int($month)) {
+            echo "<br>Invalid month<br>";
+            return false;
         }
     } else {
         return false;
     }
 
-    $d = mktime(0, 0, 0, $month, $day, $year);;
-
     if (!checkdate($month, $day, $year)) {
         echo "<br><b>The date is not exist!</b><br>";
-        echo "<br>" . date('F', $d) . " has $days_in_month days<br>";
+        echo "<br>" . date('F', strtotime('1-' . $month . '-' . $year)) . " of $year has $days_in_month days<br>";
         return false;
     }
     return true;
@@ -160,7 +146,7 @@ function validate_date($month, $day, $year)
                             if (!$year1) {
                                 echo("<option disabled selected></option>");
                             }
-                            for ($i = 1600; $i < 3001; $i++) {
+                            for ($i = 1900; $i <= date("Y"); $i++) {
                                 if ($year1 == $i) {
                                     echo("<option selected>$i</option>");
                                 } else {
@@ -243,7 +229,7 @@ function validate_date($month, $day, $year)
                             if (!$year2) {
                                 echo("<option disabled selected></option>");
                             }
-                            for ($i = 1600; $i < 3001; $i++) {
+                            for ($i = 1900; $i <= date("Y"); $i++) {
                                 if ($year2 == $i) {
                                     echo("<option selected>$i</option>");
                                 } else {
@@ -263,17 +249,26 @@ function validate_date($month, $day, $year)
     </table>
     <?php
 
-    $d1 = mktime(0, 0, 0, $month1, $day1, $year1);
-    $d2 = mktime(0, 0, 0, $month2, $day2, $year2);
 
-    validate_date($month1, $day1, $year1);
-    validate_date($month2, $day2, $year2);
+    if (validate_date($month1, $day1, $year1) && validate_date($month2, $day2, $year2)) {
+        $d1 = mktime(0, 0, 0, $month1, $day1, $year1);
+        $d2 = mktime(0, 0, 0, $month2, $day2, $year2);
 
-    calculate_age($d1);
-    calculate_age($d2);
+        print("<h3>Person 1: $name1</h3>");
+        print("Birthday: ");
+        print(display_date_in_char($d1) . "<br>");
+        print("Age: " . calculate_age($month1, $day1, $year1)->y . " years old <br>");
 
-    calculate_date_difference($d1, $d2);
-
+        print("<h3>Person 2: $name2</h3>");
+        print("Birthday: ");
+        print(display_date_in_char($d2) . "<br>");
+        print("Age: " . calculate_age($month2, $day2, $year2)->y . " years old <br>");
+        print("<br>");
+        print("<h4>Date differences</h4>");
+        print(calculate_date_difference($d1, $d2) . ' days<br>');
+        print("<h4>Age differences</h4>");
+        print(calculate_age_difference($d1, $d2) . ' years<br>');
+    }
     ?>
 </form>
 

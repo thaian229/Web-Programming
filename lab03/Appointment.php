@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <h1>You have an appointment!!!</h1>
     <title>Date and Time</title>
 </head>
 <body>
+
+<h1>You have an appointment!!!</h1>
+
 <?php
 if (isset($_GET['reset'])) {
     unset($_GET["name"]);
@@ -46,9 +48,9 @@ if (isset($_GET['reset'])) {
                             if (!$day) {
                                 echo("<option disabled selected></option>");
                             }
-                            for ($i = 1; $i < 32; $i++) {
+                            for ($i = 1; $i <= 31; $i++) {
                                 if ($day == $i) {
-                                    echo ("<option selected>$i</option>");
+                                    echo("<option selected>$i</option>");
                                 } else {
                                     echo("<option>$i</option>");
                                 }
@@ -65,12 +67,12 @@ if (isset($_GET['reset'])) {
                             } else {
                                 $month = NULL;
                             }
-                            if (!$month ) {
+                            if (!$month) {
                                 echo("<option disabled selected></option>");
                             }
                             for ($i = 1; $i < 13; $i++) {
                                 if ($month == $i) {
-                                    echo ("<option selected>$i</option>");
+                                    echo("<option selected>$i</option>");
                                 } else {
                                     echo("<option>$i</option>");
                                 }
@@ -90,9 +92,9 @@ if (isset($_GET['reset'])) {
                             if (!$year) {
                                 echo("<option disabled selected></option>");
                             }
-                            for ($i = 1600; $i < 3001; $i++) {
+                            for ($i = date('Y'); $i < date('Y') + 20; $i++) {
                                 if ($year == $i) {
-                                    echo ("<option selected>$i</option>");
+                                    echo("<option selected>$i</option>");
                                 } else {
                                     echo("<option>$i</option>");
                                 }
@@ -116,12 +118,12 @@ if (isset($_GET['reset'])) {
                             } else {
                                 $hour = NULL;
                             }
-                            if (!$hour) {
-                                echo("<option disabled selected></option>");
+                            if ($hour == NULL) {
+                                echo("<option selected></option>");
                             }
                             for ($i = 0; $i < 24; $i++) {
                                 if ($hour == $i) {
-                                    echo ("<option selected>$i</option>");
+                                    echo("<option selected>$i</option>");
                                 } else {
                                     echo("<option>$i</option>");
                                 }
@@ -138,12 +140,12 @@ if (isset($_GET['reset'])) {
                             } else {
                                 $minute = NULL;
                             }
-                            if (!$minute) {
-                                echo("<option disabled selected></option>");
+                            if ($minute == NULL) {
+                                echo("<option selected></option>");
                             }
                             for ($i = 0; $i < 60; $i++) {
                                 if ($minute == $i) {
-                                    echo ("<option selected>$i</option>");
+                                    echo("<option selected>$i</option>");
                                 } else {
                                     echo("<option>$i</option>");
                                 }
@@ -160,12 +162,12 @@ if (isset($_GET['reset'])) {
                             } else {
                                 $second = NULL;
                             }
-                            if (!$second) {
-                                echo("<option disabled selected></option>");
+                            if ($second == NULL) {
+                                echo("<option selected></option>");
                             }
                             for ($i = 0; $i < 60; $i++) {
                                 if ($second == $i) {
-                                    echo ("<option selected>$i</option>");
+                                    echo("<option selected>$i</option>");
                                 } else {
                                     echo("<option>$i</option>");
                                 }
@@ -182,48 +184,26 @@ if (isset($_GET['reset'])) {
         </tr>
     </table>
     <?php
-    if ($name && $day && $month && $year && $hour && $minute && $second) {
-        switch ($month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                $days_in_month = 31;
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                $days_in_month = 30;
-                break;
-            case 2:
-                if (date("l", $year)) {
-                    $days_in_month = 29;
-                } else {
-                    $days_in_month = 28;
-                }
-                break;
-            default:
-                echo "<br>Invalid month<br>";
-                break;
-        }
-
-        echo "<br>Hi $name! <br>";
-        $d = mktime($hour, $minute, $second, $month, $day, $year);
-
-        if (!checkdate($month, $day, $year)) {
-            echo "<b>The date is not exist!</b><br>";
-            echo "<br>More information <br>";
-            echo "<br>This month has $days_in_month days";
+    if ($name && $day && $month && $year && $hour != NULL && $minute != NULL && $second != NULL) {
+        $days_in_month = date('t', strtotime('1-' . $month . '-' . $year));
+        if ($month < 1 && $month > 12 && !is_int($month)) {
+            echo "<br>Invalid month<br>";
         } else {
-            echo "Your appoinment on " . date("H:i:s", $d) . ", " . date("d/m/Y", $d) . "<br>";
-            echo "<br>More information <br>";
-            echo "<br>In 12 hours, the time and date is " . date("h:i:s A", $d) . ", " . date("d/m/Y", $d) . "<br>";
-            echo "<br>This month has $days_in_month days";
+            if (!checkdate($month, $day, $year)) {
+                echo "<br><b>The date is not exist!</b><br>";
+                echo "<br>More information <br>";
+                echo "<br>This month has $days_in_month days";
+            } else {
+                echo "<br>Hi $name! <br>";
+                $d = mktime($hour, $minute, $second, $month, $day, $year);
+                echo "<br>Your appointment on " . date("H:i:s, d/m/Y", $d) . "<br>";
+                echo "<br>More information <br>";
+                echo "<br>In 12 hours, the time and date is " . date("h:i:s A, d/m/Y", $d) . "<br>";
+                echo "<br>This month has $days_in_month days";
+            }
         }
+
+
     }
     ?>
 </form>
