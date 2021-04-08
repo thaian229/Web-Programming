@@ -53,6 +53,8 @@
                     <input type='submit' value='Add new category'/>
                 </form>
             ";
+        } else {
+            print "<br/> <h4> Cannot connect to database!!! </h4>";
         }
 
         // handle submission
@@ -68,8 +70,10 @@
             $connect->query($query_insert);
             unset($_POST['cat_id']);
             // refesh webpage
+            $connect->close();
             echo "<meta http-equiv='refresh' content='0'>";
         }
+        $connect->close();
     ?>
 </body>
 
