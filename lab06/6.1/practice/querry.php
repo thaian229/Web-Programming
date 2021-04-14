@@ -19,7 +19,7 @@ $query = "SELECT * FROM $table_name";
 print "The query is <i>$query </i><br>";
 $connect->select_db($database);
 $results = $connect->query($query);
-if ($results_id) {
+if ($results) {
     print '<table border=1>';
     print '<th>Num<th>Product<th>Cost<th>Weight<th>Count';
     while ($row = $results->fetch_row()) {

@@ -32,8 +32,8 @@ if (isset($_POST['key'])) {
             }
         print '</tr>';
         }
-    } else { 
-        die ("query=$Query Failed");
+    } else {
+        die ("query=$query Failed");
     }
     
     $connect->close();
