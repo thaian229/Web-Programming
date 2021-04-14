@@ -17,6 +17,10 @@ Class Page {
         $this->copyright = "";
     }
 
+    public function setHeader($header) {
+        $this->header = $header;
+    }
+
     public function setTitle($title) {
         $this->title = $title;
     }
@@ -29,7 +33,7 @@ Class Page {
         $this->copyright = $copyright;
     }
 
-    public function addHeader($header) {
+    private function addHeader() {
         $this->header = "
                         <!DOCTYPE html>
                         <html lang='en'>
@@ -38,7 +42,7 @@ Class Page {
                             <title>$this->title</title>
                             <link rel='stylesheet' href='style.css'>
                         </head>
-                        <body><div class='container'><header> " . $header . " </header>";
+                        <body><div class='container'><header> " . $this->header . " </header>";
     }
 
     public function addContent($partOfPage) {
@@ -50,18 +54,18 @@ Class Page {
         }
     }
 
-    public function addFooter($copyright) {
-        $this->copyright = $copyright;
+    private function addFooter() {
         $this->footer .= "<BR><footer><p>&copy" . $this->year . " " . $this->copyright . " All Rights Reserved</p></footer></div></body>
     </html>";
     }
 
     public function get() {
+        $this->addHeader();
+        $this->addFooter();
         $this->finalPage = $this->header . $this->page .
             $this->footer;
         return $this->finalPage;
     }
-
 
     public function createHtml() {
         file_put_contents($this->title . ".html", $this->finalPage);
@@ -76,10 +80,9 @@ if($submit) {
     $page = new Page();
     if (isset($_POST['title'])) $page->setTitle($_POST['title']);
     if (isset($_POST['year'])) $page->setYear($_POST['year']);
-    if (isset($_POST['header'])) $page->addHeader($_POST['header']);
-    else $page->addHeader('');
+    if (isset($_POST['header'])) $page->setHeader($_POST['header']);
     if (isset($_POST['content'])) $page->addContent($_POST['content']);
-    if (isset($_POST['copyright'])) $page->addFooter($_POST['copyright']);
+    if (isset($_POST['copyright'])) $page->setCopyright($_POST['copyright']);
     $page->get();
     $page->createHtml();
 }
