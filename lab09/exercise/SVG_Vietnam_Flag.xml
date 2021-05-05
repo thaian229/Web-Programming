@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800">
+  <rect x="0" y="0" width="450" height="300" fill="red" stroke="black" stroke-width="1" transform="translate(100,100)" />
+  <polygon points="225,55 165,243 315,123 135,123 285,243" style="fill:yellow;fill-rule:nonzero;" transform="translate(100,100)"/>
+</svg>

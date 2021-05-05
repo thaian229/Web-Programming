@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sis>
+    <student>
+        <id>20176677</id>
+        <name>
+            <firstname>Thai An</firstname>
+            <lastname>Nguyen</lastname>
+        </name>
+        <bod>22/09/1999</bod>
+        <gender>Nam</gender>
+        <address>Thanh Xuan - Ha Noi</address>
+        <class>TT.CNTT ICT 02</class>
+        <year>K62</year>
+        <expire>31/08/2022</expire>
+    </student>
+</sis>
