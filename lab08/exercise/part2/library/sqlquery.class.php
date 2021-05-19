@@ -171,8 +171,8 @@ class SQLQuery
                         if (mysqli_num_rows($resultChild) > 0) {
                             $numOfFieldsChild = mysqli_num_fields($resultChild);
                             for ($j = 0; $j < $numOfFieldsChild; ++$j) {
-                                array_push($tableChild, mysqli_fetch_field_direct($resultChild, $i)->table);
-                                array_push($fieldChild, mysqli_fetch_field_direct($resultChild, $i)->name);
+                                array_push($tableChild, mysqli_fetch_field_direct($resultChild, $j)->table);
+                                array_push($fieldChild, mysqli_fetch_field_direct($resultChild, $j)->name);
                             }
 
                             while ($rowChild = mysqli_fetch_row($resultChild)) {
