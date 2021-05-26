@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Colors</title>
+</head>
+<body>
+    <a href="#" id="red" class="color">RED </a>|
+    <a href="#" id="green" class="color">GREEN </a>|
+    <a href="#" id="blue" class="color">BLUE </a>
+    <hr>
+    <p id="text">
+        Donizzle mah nizzle auctor maurizzle. Phasellizzle gangster elizzle izzle nibh tellivizzle tincidunt. Maecenizzle a break it down. Vestibulizzle in lacizzle fo shizzle maurizzle elementizzle crunk. Nunc at tortizzle own yo' amet cool ultricizzle porta. Shizzlin dizzle velizzle tortor, ultricizzle crazy, hendrerit crunk, adipiscing quis, dui. Etiam velizzle shizznit, aliquizzle dope, pharetra nizzle, dictizzle gizzle, turpizzle. Vivamus neque. Ghetto lorizzle. Boom shackalack vitae erizzle bizzle libero commodo break yo neck, yall. Shit stuff pimpin' eu nibh shizzle my nizzle crocodizzle shizznit. Phasellizzle fermentum yo non fo shizzle. Suspendisse lorem leo, sollicitudin sizzle, go to hizzle the bizzle, shiz sure, justo. Donizzle crackalackin porttitizzle pizzle. Nunc feugizzle, break it down a ornare fizzle, sapizzle its fo rizzle tincidunt owned, egizzle dapibus pede enizzle izzle fo shizzle my nizzle. Phasellizzle quam break yo neck, yall, imperdiet sizzle, crackalackin izzle, semper in, sapizzle. Ut uhuh ... yih! magna vizzle shiz. Sizzle brizzle owned, suscipizzle vitae, vestibulum et, rutrizzle stuff, velizzle. Maurizzle a mauris. Sizzle non magna sit amet risus iaculis hizzle.
+    </p>
+</body>
+<script>
+    let colorLinks = document.getElementsByClassName("color");
+    let txt = document.getElementById("text");
+    for (let colorLn of colorLinks) {
+        colorLn.onmouseover = function (e) {
+            txt.style.color = this.textContent.toLocaleLowerCase();
+        };
+
+        colorLn.onmouseout = function (e) {
+            txt.style.color = "black";
+        };
+    }
+</script>
+</html>
