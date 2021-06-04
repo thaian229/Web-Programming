@@ -1,0 +1,4 @@
+server : localhost
+username : root
+no database password
+database name : lab11.4
